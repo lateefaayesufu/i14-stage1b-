@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Special+Elite&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -32,216 +33,283 @@
         <div class="film-counter right">SAFETY FILM</div>
       </div>
 
-      <article
-        data-testid="test-profile-card"
-        aria-label="Profile card for Lee Yousuf"
+      <!-- FLIP WRAPPER -->
+      <div
+        class="flip-wrapper"
+        id="flip-wrapper"
+        role="button"
+        tabindex="0"
+        aria-label="Flip card to see profile details"
+        aria-pressed="false"
       >
-        <!-- LEFT SPROCKET RAIL -->
-        <div class="sprocket-rail left" aria-hidden="true">
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-        </div>
-
-        <!-- MAIN CONTENT -->
-        <div class="film-frame">
-          <!-- AVATAR / PHOTO PRINT -->
-          <figure class="photo-print">
-            <div class="print-border">
-              <img
-                data-testid="test-user-avatar"
-                src="pic.jpg"
-                alt="Portrait of Lee Yousuf, aerospace engineering student at Stanford University"
-                class="avatar-img"
-              />
-              <div class="print-grain" aria-hidden="true"></div>
-              <div class="print-vignette" aria-hidden="true"></div>
-
-              <!-- Film timestamp overlay -->
-              <div class="film-timestamp" aria-hidden="true">
-                <span>2026 ▶ 04</span>
-                <span>STA-NFORD</span>
-              </div>
-
-              <!-- Frame number -->
-              <div class="frame-number" aria-hidden="true">▷ 14A</div>
+        <article
+          data-testid="test-profile-card"
+          aria-label="Profile card for Lee Yousuf"
+          class="flip-card"
+        >
+          <div class="card-face card-front">
+            <!-- LEFT SPROCKET RAIL -->
+            <div class="sprocket-rail left" aria-hidden="true">
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
             </div>
-            <figcaption class="photo-caption">
-              Fig. 01 — Subject at Stanford, CA
-            </figcaption>
-          </figure>
 
-          <!-- EXPOSURE DATA STRIP -->
-          <div class="exposure-strip" aria-hidden="true">
-            <span>ISO 400</span>
-            <span>f/1.8</span>
-            <span>1/250s</span>
-            <span>35mm</span>
-            <span>☐ ☐ ☐ ☐ ☐ ☐ ☐</span>
-          </div>
+            <div class="front-inner">
+              <figure class="photo-print">
+                <div class="print-border">
+                  <img
+                    data-testid="test-user-avatar"
+                    src="pic.jpg"
+                    alt="Portrait of Lee Yousuf, aerospace engineering student at Stanford University"
+                    class="avatar-img"
+                  />
+                  <div class="print-grain" aria-hidden="true"></div>
+                  <div class="print-vignette" aria-hidden="true"></div>
+                  <div class="film-timestamp" aria-hidden="true">
+                    <span>2026 ▶ 04</span>
+                    <span>STA-NFORD</span>
+                  </div>
+                  <div class="frame-number" aria-hidden="true">▷ 14A</div>
+                </div>
+                <figcaption class="photo-caption">
+                  Fig. 01 — Subject at Stanford, CA
+                </figcaption>
+              </figure>
 
-          <!-- PROFILE INFO -->
-          <div class="profile-info">
-            <!-- NAME -->
-            <header class="name-block">
-              <p class="frame-label" aria-hidden="true">— FRAME 14 —</p>
-              <h2 data-testid="test-user-name" class="user-name">lee yousuf</h2>
-              <p class="user-title">
-                aerospace engineering · stanford university
-              </p>
-            </header>
-
-            <!-- BIO -->
-            <section class="bio-section" aria-label="Biography">
-              <p class="section-tag" aria-hidden="true">[BIO]</p>
-              <p data-testid="test-user-bio" class="user-bio">
-                building rockets by day, breaking compilers by night. stanford
-                aerospace engineering student with a habit of solving problems
-                that don't have textbook answers yet. somewhere between orbital
-                mechanics and a strong cup of coffee — probably both at once.
-              </p>
-            </section>
-
-            <!-- EPOCH TIME -->
-            <div class="time-section">
-              <p class="section-tag" aria-hidden="true">[TIMESTAMP]</p>
-              <div class="time-display">
-                <span class="time-prefix" aria-hidden="true">ms ▶</span>
-                <span
-                  data-testid="test-user-time"
-                  id="user-time"
-                  class="time-value"
-                  aria-live="polite"
-                  aria-atomic="true"
-                  aria-label="Current time in milliseconds"
-                  >1776222425503</span
-                >
+              <!-- Flip hint -->
+              <div class="flip-hint" aria-hidden="true">
+                <span class="hint-text">FLIP TO DEVELOP ▷</span>
               </div>
             </div>
 
-            <!-- SOCIAL LINKS -->
-            <nav
-              data-testid="test-user-social-links"
-              aria-label="Social media links"
-              class="social-section"
-            >
-              <p class="section-tag" aria-hidden="true">[CONTACT]</p>
-              <ul class="social-list" role="list">
-                <li>
-                  <a
-                    data-testid="test-user-social-twitter"
-                    href="https://twitter.com/leeyousuf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Lee Yousuf on Twitter / X"
-                    class="social-link"
-                  >
-                    <span class="link-bullet" aria-hidden="true">▷</span>
-                    <span>twitter</span>
-                    <span class="link-handle">@leeyousuf</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    data-testid="test-user-social-github"
-                    href="https://github.com/leeyousuf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Lee Yousuf on GitHub"
-                    class="social-link"
-                  >
-                    <span class="link-bullet" aria-hidden="true">▷</span>
-                    <span>github</span>
-                    <span class="link-handle">leeyousuf</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    data-testid="test-user-social-linkedin"
-                    href="https://linkedin.com/in/leeyousuf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Lee Yousuf on LinkedIn"
-                    class="social-link"
-                  >
-                    <span class="link-bullet" aria-hidden="true">▷</span>
-                    <span>linkedin</span>
-                    <span class="link-handle">leeyousuf</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            <!-- HOBBIES + DISLIKES -->
-            <div class="lists-row">
-              <section aria-labelledby="hobbies-label">
-                <p id="hobbies-label" class="section-tag">[INTERESTS]</p>
-                <ul
-                  data-testid="test-user-hobbies"
-                  class="profile-list"
-                  role="list"
-                  aria-label="Hobbies and interests"
-                >
-                  <li><span aria-hidden="true">+</span> orbital mechanics</li>
-                  <li><span aria-hidden="true">+</span> competitive chess</li>
-                  <li><span aria-hidden="true">+</span> astrophotography</li>
-                  <li><span aria-hidden="true">+</span> building keyboards</li>
-                  <li>
-                    <span aria-hidden="true">+</span> vintage sci-fi novels
-                  </li>
-                </ul>
-              </section>
-
-              <section aria-labelledby="dislikes-label">
-                <p id="dislikes-label" class="section-tag">[DISLIKES]</p>
-                <ul
-                  data-testid="test-user-dislikes"
-                  class="profile-list dislikes"
-                  role="list"
-                  aria-label="Dislikes"
-                >
-                  <li>
-                    <span aria-hidden="true">–</span> merge conflicts @ 2am
-                  </li>
-                  <li><span aria-hidden="true">–</span> light mode</li>
-                  <li><span aria-hidden="true">–</span> slow wi-fi</li>
-                  <li>
-                    <span aria-hidden="true">–</span> 40-person group chats
-                  </li>
-                  <li>
-                    <span aria-hidden="true">–</span> windows update timing
-                  </li>
-                </ul>
-              </section>
+            <!-- RIGHT SPROCKET RAIL -->
+            <div class="sprocket-rail right" aria-hidden="true">
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
             </div>
           </div>
-        </div>
 
-        <!-- RIGHT SPROCKET RAIL -->
-        <div class="sprocket-rail right" aria-hidden="true">
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-          <div class="sprocket"></div>
-        </div>
-      </article>
+          <!-- ═══════════════════════════════
+               BACK — the full profile
+          ═══════════════════════════════ -->
+          <div class="card-face card-back">
+            <!-- LEFT SPROCKET RAIL -->
+            <div class="sprocket-rail left" aria-hidden="true">
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+            </div>
+
+            <div class="film-frame back-frame">
+              <!-- EXPOSURE DATA STRIP -->
+              <div class="exposure-strip" aria-hidden="true">
+                <span>ISO 400</span>
+                <span>f/1.8</span>
+                <span>1/250s</span>
+                <span>35mm</span>
+                <span>☐ ☐ ☐ ☐ ☐</span>
+              </div>
+
+              <!-- PROFILE INFO -->
+              <div class="profile-info">
+                <!-- NAME -->
+                <header class="name-block">
+                  <p class="frame-label" aria-hidden="true">— FRAME 14 —</p>
+                  <h2 data-testid="test-user-name" class="user-name">
+                    lee yousuf
+                  </h2>
+                  <p class="user-title">
+                    aerospace Engineering · stanford university
+                  </p>
+                </header>
+
+                <!-- BIO -->
+                <section class="bio-section" aria-label="Biography">
+                  <p class="section-tag" aria-hidden="true">[BIO]</p>
+                  <p data-testid="test-user-bio" class="user-bio">
+                    building rockets by day, breaking compilers by night.
+                    stanford aerospace engineering student with a habit of
+                    solving problems that don't have textbook answers yet.
+                    somewhere between orbital mechanics and orange juice —
+                    probably both at once.
+                  </p>
+                </section>
+
+                <!-- EPOCH TIME -->
+                <div class="time-section">
+                  <p class="section-tag" aria-hidden="true">[TIMESTAMP]</p>
+                  <div class="time-display">
+                    <span class="time-prefix" aria-hidden="true">ms ▶</span>
+                    <span
+                      data-testid="test-user-time"
+                      id="user-time"
+                      class="time-value"
+                      aria-live="polite"
+                      aria-atomic="true"
+                      aria-label="Current time in milliseconds"
+                      >0</span
+                    >
+                  </div>
+                </div>
+
+                <!-- SOCIAL LINKS -->
+                <nav
+                  data-testid="test-user-social-links"
+                  aria-label="Social media links"
+                  class="social-section"
+                >
+                  <p class="section-tag" aria-hidden="true">[CONTACT]</p>
+                  <ul class="social-list" role="list">
+                    <li>
+                      <a
+                        data-testid="test-user-social-twitter"
+                        href="https://twitter.com/leeyousuf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Lee Yousuf on Twitter / X"
+                        class="social-link"
+                      >
+                        <span class="link-bullet" aria-hidden="true">▷</span>
+                        <span>twitter</span>
+                        <span class="link-handle">@leeyousuf</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        data-testid="test-user-social-github"
+                        href="https://github.com/leeyousuf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Lee Yousuf on GitHub"
+                        class="social-link"
+                      >
+                        <span class="link-bullet" aria-hidden="true">▷</span>
+                        <span>github</span>
+                        <span class="link-handle">leeyousuf</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        data-testid="test-user-social-linkedin"
+                        href="https://linkedin.com/in/leeyousuf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Lee Yousuf on LinkedIn"
+                        class="social-link"
+                      >
+                        <span class="link-bullet" aria-hidden="true">▷</span>
+                        <span>linkedIn</span>
+                        <span class="link-handle">leeyousuf</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+
+                <!-- HOBBIES + DISLIKES -->
+                <div class="lists-row">
+                  <section aria-labelledby="hobbies-label">
+                    <p id="hobbies-label" class="section-tag">[INTERESTS]</p>
+                    <ul
+                      data-testid="test-user-hobbies"
+                      class="profile-list"
+                      role="list"
+                      aria-label="Hobbies and interests"
+                    >
+                      <li>
+                        <span aria-hidden="true">+</span> orbital mechanics
+                      </li>
+                      <li>
+                        <span aria-hidden="true">+</span> competitive chess
+                      </li>
+                      <li>
+                        <span aria-hidden="true">+</span> astrophotography
+                      </li>
+                      <li>
+                        <span aria-hidden="true">+</span> building keyboards
+                      </li>
+                      <li>
+                        <span aria-hidden="true">+</span> vintage sci-fi novels
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section aria-labelledby="dislikes-label">
+                    <p id="dislikes-label" class="section-tag">[DISLIKES]</p>
+                    <ul
+                      data-testid="test-user-dislikes"
+                      class="profile-list dislikes"
+                      role="list"
+                      aria-label="Dislikes"
+                    >
+                      <li>
+                        <span aria-hidden="true">–</span> merge conflicts @ 2am
+                      </li>
+                      <li><span aria-hidden="true">–</span> light mode</li>
+                      <li><span aria-hidden="true">–</span> slow wi-fi</li>
+                      <li>
+                        <span aria-hidden="true">–</span> 40-person group chats
+                      </li>
+                      <li>
+                        <span aria-hidden="true">–</span> windows update timing
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+
+                <!-- flip back hint -->
+                <div class="flip-hint back-hint" aria-hidden="true">
+                  <span class="hint-text">◁ FLIP BACK</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT SPROCKET RAIL -->
+            <div class="sprocket-rail right" aria-hidden="true">
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+              <div class="sprocket"></div>
+            </div>
+          </div>
+        </article>
+      </div>
 
       <!-- Film strip bottom sprockets -->
       <div class="sprocket-strip bottom" aria-hidden="true">
