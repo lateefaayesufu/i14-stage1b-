@@ -1,0 +1,557 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --film-black: #0d0b08;
+  --film-dark: #1a1510;
+  --film-mid: #2e2820;
+  --sprocket: #141008;
+  --cream: #f0e8d8;
+  --cream2: #e8dcc8;
+  --cream3: #d8ccb8;
+  --warm-white: #faf4e8;
+  --amber: #c8841a;
+  --amber2: #e8a030;
+  --amber-lt: #f5e4c0;
+  --red-orange: #c04818;
+  --ink: #1a1208;
+  --muted: #6a5c48;
+  --faded: #9a8c78;
+}
+
+/* ── BASE ── */
+body {
+  background: var(--film-black);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: "DM Mono", monospace;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle grain on background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── PAGE WRAPPER ── */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── SPROCKET STRIPS (top/bottom) ── */
+.sprocket-strip {
+  background: var(--sprocket);
+  border: 1.5px solid #2a2218;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sprocket-strip.top {
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+}
+
+.sprocket-strip.bottom {
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+}
+
+.sprockets {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.sprocket-strip .sprocket {
+  width: 14px;
+  height: 10px;
+  border: 1.5px solid #3a3028;
+  border-radius: 2px;
+  background: var(--film-black);
+  flex-shrink: 0;
+}
+
+.film-counter {
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: #f5a623;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* ── ARTICLE — FILM FRAME ── */
+article[data-testid="test-profile-card"] {
+  background: var(--film-dark);
+  border-left: 1.5px solid #2a2218;
+  border-right: 1.5px solid #2a2218;
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  animation: expose 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  position: relative;
+}
+
+@keyframes expose {
+  from {
+    opacity: 0;
+    filter: brightness(3) saturate(0);
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1) saturate(1);
+    transform: scale(1);
+  }
+}
+
+/* ── SIDE SPROCKET RAILS ── */
+.sprocket-rail {
+  background: var(--sprocket);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 16px 0;
+  gap: 0;
+}
+
+.sprocket-rail.left {
+  border-right: 1.5px solid #2a2218;
+}
+.sprocket-rail.right {
+  border-left: 1.5px solid #2a2218;
+}
+
+.sprocket-rail .sprocket {
+  width: 16px;
+  height: 11px;
+  border: 1.5px solid #3a3028;
+  border-radius: 2px;
+  background: var(--film-black);
+  flex-shrink: 0;
+}
+
+/* ── FILM FRAME INNER ── */
+.film-frame {
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Heavy grain overlay on the whole frame */
+.film-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 10;
+  mix-blend-mode: multiply;
+}
+
+/* ── PHOTO PRINT ── */
+.photo-print {
+  position: relative;
+  background: var(--film-black);
+  padding: 12px 12px 0;
+}
+
+.print-border {
+  position: relative;
+  border: 8px solid var(--warm-white);
+  box-shadow:
+    0 0 0 1px var(--cream3),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  background: var(--cream2);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: sepia(0.35) contrast(1.1) brightness(0.95) saturate(0.85);
+  transition: filter 0.5s;
+}
+
+.avatar-img:hover {
+  filter: sepia(0.1) contrast(1.05) brightness(1) saturate(1);
+}
+
+/* Grain on photo */
+.print-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.12'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Vignette on photo */
+.print-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Film timestamp burnt into corner */
+.film-timestamp {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  color: var(--amber2);
+  letter-spacing: 0.12em;
+  text-shadow:
+    0 0 6px var(--amber),
+    0 0 12px var(--amber);
+  opacity: 0.9;
+}
+
+.frame-number {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  color: var(--amber2);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 6px var(--amber);
+  opacity: 0.8;
+}
+
+.photo-caption {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--faded);
+  text-align: center;
+  padding: 8px 0 4px;
+  text-transform: uppercase;
+}
+
+/* ── EXPOSURE DATA STRIP ── */
+.exposure-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background: var(--film-black);
+  color: var(--amber);
+  font-family: "DM Mono", monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  border-top: 1px solid #2a2218;
+  border-bottom: 1px solid #2a2218;
+  opacity: 0.85;
+}
+
+/* ── PROFILE INFO ── */
+.profile-info {
+  padding: 1.4rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: var(--cream);
+}
+
+/* ── NAME ── */
+.name-block {
+  border-left: 3px solid var(--film-black);
+  padding-left: 12px;
+}
+
+.frame-label {
+  font-family: "DM Mono", monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.35em;
+  color: var(--faded);
+  margin-bottom: 6px;
+}
+
+.user-name {
+  font-family: "Special Elite", cursive;
+  font-size: clamp(32px, 7vw, 48px);
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.user-title {
+  font-family: "DM Mono", monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── SECTION TAG ── */
+.section-tag {
+  font-family: "DM Mono", monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.3em;
+  color: var(--amber);
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+/* ── BIO ── */
+.user-bio {
+  font-family: "Special Elite", cursive;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #2a2010;
+  letter-spacing: 0.01em;
+}
+
+/* ── TIME ── */
+.time-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--film-black);
+  border: 1px solid #2a2218;
+  padding: 10px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanline effect */
+.time-display::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  pointer-events: none;
+}
+
+.time-prefix {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.time-value {
+  font-family: "DM Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--amber2);
+  letter-spacing: 0.06em;
+  text-shadow:
+    0 0 8px var(--amber),
+    0 0 20px rgba(200, 132, 26, 0.3);
+  word-break: break-all;
+}
+
+/* ── SOCIAL LINKS ── */
+.social-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--cream3);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--cream3);
+  text-decoration: none;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  transition:
+    background 0.15s,
+    padding-left 0.15s;
+}
+
+.social-list li:last-child .social-link {
+  border-bottom: none;
+}
+
+.social-link:hover {
+  background: var(--film-black);
+  color: var(--amber2);
+  padding-left: 20px;
+}
+
+.social-link:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: -2px;
+}
+
+.link-bullet {
+  color: var(--amber);
+  font-size: 10px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.social-link:hover .link-bullet {
+  opacity: 1;
+}
+
+.link-handle {
+  margin-left: auto;
+  color: var(--faded);
+  font-size: 10px;
+  transition: color 0.15s;
+}
+
+.social-link:hover .link-handle {
+  color: var(--amber);
+}
+
+/* ── LISTS ── */
+.lists-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.profile-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-list li {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--cream3);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+  transition: padding-left 0.12s;
+}
+
+.profile-list li:last-child {
+  border-bottom: none;
+}
+
+.profile-list li span {
+  color: var(--amber);
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 11px;
+}
+
+.profile-list.dislikes li span {
+  color: var(--red-orange);
+}
+
+.profile-list li:hover {
+  padding-left: 4px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .page-wrapper {
+    max-width: 100%;
+  }
+
+  .sprocket-strip .sprocket {
+    width: 10px;
+    height: 8px;
+    gap: 8px;
+  }
+  .sprockets {
+    gap: 8px;
+  }
+
+  .profile-info {
+    padding: 1.2rem 1.2rem 1.4rem;
+  }
+
+  .user-name {
+    font-size: 32px;
+  }
+
+  .exposure-strip {
+    font-size: 7.5px;
+    gap: 4px;
+    padding: 6px 10px;
+  }
+  .exposure-strip span:nth-child(5) {
+    display: none;
+  }
+
+  .time-value {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .lists-row {
+    grid-template-columns: 1fr;
+  }
+  .sprocket-rail .sprocket {
+    width: 12px;
+    height: 9px;
+  }
+  .user-name {
+    font-size: 28px;
+  }
+  .exposure-strip span:nth-child(4) {
+    display: none;
+  }
+  .film-counter.right {
+    display: none;
+  }
+}
