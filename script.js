@@ -1,7 +1,3 @@
-/* ─────────────────────────────────────────
-   Stage 1B — Profile Card Script
-   ───────────────────────────────────────── */
-
 document.addEventListener("DOMContentLoaded", function () {
   /* ── Epoch time ticker ── */
   const timeEl = document.getElementById("user-time");
