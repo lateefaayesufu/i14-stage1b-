@@ -22,6 +22,13 @@
   --ink: #1a1208;
   --muted: #6a5c48;
   --faded: #9a8c78;
+
+  --space-xs: clamp(4px, 1vw, 6px);
+  --space-sm: clamp(8px, 2vw, 12px);
+  --space-md: clamp(12px, 3vw, 16px);
+  --space-lg: clamp(16px, 4vw, 24px);
+
+  --rail-w: clamp(20px, 5vw, 32px);
 }
 
 /* ── BASE ── */
@@ -31,7 +38,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 4vw, 1rem);
   font-family: "DM Mono", monospace;
   position: relative;
   overflow-x: hidden;
@@ -60,11 +67,11 @@ body::before {
 .sprocket-strip {
   background: var(--sprocket);
   border: 1.5px solid #2a2218;
-  padding: 6px 16px;
+  padding: clamp(4px, 1.5vw, 6px) clamp(8px, 3vw, 16px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: clamp(6px, 2vw, 12px);
 }
 .sprocket-strip.top {
   border-bottom: none;
@@ -77,14 +84,15 @@ body::before {
 
 .sprockets {
   display: flex;
-  gap: 12px;
+  gap: clamp(6px, 2vw, 12px);
   align-items: center;
   flex: 1;
   justify-content: center;
+  overflow: hidden;
 }
 .sprocket-strip .sprocket {
-  width: 14px;
-  height: 10px;
+  width: clamp(8px, 2.5vw, 14px);
+  height: clamp(6px, 2vw, 10px);
   border: 1.5px solid #3a3028;
   border-radius: 2px;
   background: var(--film-black);
@@ -93,11 +101,12 @@ body::before {
 
 .film-counter {
   font-family: "DM Mono", monospace;
-  font-size: 8px;
+  font-size: clamp(7px, 1.8vw, 8px);
   letter-spacing: 0.2em;
   color: #f5a623;
   opacity: 0.6;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ── FLIP WRAPPER ── */
@@ -105,6 +114,9 @@ body::before {
   perspective: 1400px;
   cursor: pointer;
   outline: none;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .flip-wrapper:focus-visible {
@@ -118,7 +130,6 @@ body::before {
   width: 100%;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.645, 0.045, 0.355, 1);
-  /* expose animation on load */
   animation: expose 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
@@ -149,7 +160,7 @@ body::before {
   border-right: 1.5px solid #2a2218;
   background: var(--film-dark);
   display: grid;
-  grid-template-columns: 32px 1fr 32px;
+  grid-template-columns: var(--rail-w) 1fr var(--rail-w);
 }
 
 .card-back {
@@ -157,7 +168,6 @@ body::before {
   top: 0;
   left: 0;
   transform: rotateY(180deg);
-  /* mirror the sprockets so they face right when flipped */
 }
 
 /* ── SPROCKET RAILS ── */
@@ -167,7 +177,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 16px 0;
+  padding: var(--space-md) 0;
 }
 .sprocket-rail.left {
   border-right: 1.5px solid #2a2218;
@@ -176,8 +186,8 @@ body::before {
   border-left: 1.5px solid #2a2218;
 }
 .sprocket-rail .sprocket {
-  width: 16px;
-  height: 11px;
+  width: clamp(10px, 3vw, 16px);
+  height: clamp(7px, 2vw, 11px);
   border: 1.5px solid #3a3028;
   border-radius: 2px;
   background: var(--film-black);
@@ -191,9 +201,10 @@ body::before {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+
+  min-width: 0;
 }
 
-/* Grain on front */
 .front-inner::after {
   content: "";
   position: absolute;
@@ -208,13 +219,13 @@ body::before {
 .photo-print {
   position: relative;
   background: var(--film-black);
-  padding: 16px 16px 0;
+  padding: var(--space-md) var(--space-md) 0;
   flex: 1;
 }
 
 .print-border {
   position: relative;
-  border: 10px solid var(--warm-white);
+  border: clamp(6px, 2vw, 10px) solid var(--warm-white);
   box-shadow:
     0 0 0 1px var(--cream3),
     inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -254,14 +265,14 @@ body::before {
 
 .film-timestamp {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: clamp(6px, 2vw, 10px);
+  right: clamp(6px, 2vw, 10px);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
   font-family: "DM Mono", monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 2vw, 9px);
   color: var(--amber2);
   letter-spacing: 0.12em;
   text-shadow:
@@ -272,10 +283,10 @@ body::before {
 
 .frame-number {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: clamp(6px, 2vw, 10px);
+  left: clamp(6px, 2vw, 10px);
   font-family: "DM Mono", monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 2vw, 9px);
   color: var(--amber2);
   letter-spacing: 0.15em;
   text-shadow: 0 0 6px var(--amber);
@@ -284,11 +295,11 @@ body::before {
 
 .photo-caption {
   font-family: "DM Mono", monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 2vw, 9px);
   letter-spacing: 0.18em;
   color: var(--faded);
   text-align: center;
-  padding: 10px 0 6px;
+  padding: clamp(6px, 2vw, 10px) 0 clamp(4px, 1.5vw, 6px);
   text-transform: uppercase;
   background: var(--film-black);
 }
@@ -296,13 +307,13 @@ body::before {
 /* ── FLIP HINT ── */
 .flip-hint {
   background: var(--film-black);
-  padding: 10px 16px 14px;
+  padding: clamp(6px, 2vw, 10px) var(--space-md) clamp(10px, 3vw, 14px);
   text-align: center;
 }
 
 .hint-text {
   font-family: "DM Mono", monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 2vw, 9px);
   letter-spacing: 0.35em;
   color: var(--amber);
   opacity: 0.6;
@@ -333,6 +344,7 @@ body::before {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  min-width: 0;
 }
 
 .back-frame::after {
@@ -350,33 +362,35 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 16px;
+  padding: clamp(4px, 1.5vw, 6px) var(--space-md);
   background: var(--film-black);
   color: var(--amber);
   font-family: "DM Mono", monospace;
-  font-size: 8.5px;
+  font-size: clamp(7px, 2vw, 8.5px);
   letter-spacing: 0.2em;
   border-bottom: 1px solid #2a2218;
   opacity: 0.85;
+  gap: var(--space-sm);
 }
 
 /* ── PROFILE INFO ── */
 .profile-info {
-  padding: 0.75rem 1.2rem 0.9rem;
+  padding: clamp(0.6rem, 3vw, 0.75rem) clamp(0.75rem, 4vw, 1.2rem)
+    clamp(0.75rem, 3vw, 0.9rem);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: clamp(0.45rem, 2vw, 0.6rem);
 }
 
 /* ── NAME ── */
 .name-block {
   border-left: 3px solid var(--film-black);
-  padding-left: 12px;
+  padding-left: clamp(8px, 3vw, 12px);
 }
 
 .frame-label {
   font-family: "DM Mono", monospace;
-  font-size: 7.5px;
+  font-size: clamp(6.5px, 1.8vw, 7.5px);
   letter-spacing: 0.35em;
   color: var(--faded);
   margin-bottom: 3px;
@@ -384,14 +398,14 @@ body::before {
 
 .user-name {
   font-family: "Special Elite", cursive;
-  font-size: clamp(27px, 5vw, 32px);
+  font-size: clamp(22px, 6vw, 32px);
   color: var(--ink);
   line-height: 1;
   margin-bottom: 4px;
 }
 .user-title {
   font-family: "DM Mono", monospace;
-  font-size: 8px;
+  font-size: clamp(7px, 1.8vw, 8px);
   letter-spacing: 0.18em;
   color: var(--muted);
   text-transform: uppercase;
@@ -400,7 +414,7 @@ body::before {
 /* ── SECTION TAG ── */
 .section-tag {
   font-family: "DM Mono", monospace;
-  font-size: 7.5px;
+  font-size: clamp(6.5px, 1.8vw, 7.5px);
   letter-spacing: 0.3em;
   color: var(--amber);
   margin-bottom: 4px;
@@ -410,7 +424,7 @@ body::before {
 /* ── BIO ── */
 .user-bio {
   font-family: "Special Elite", cursive;
-  font-size: 11.5px;
+  font-size: clamp(10px, 2.5vw, 11.5px);
   line-height: 1.55;
   color: #2a2010;
 }
@@ -419,10 +433,10 @@ body::before {
 .time-display {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(5px, 2vw, 8px);
   background: var(--film-black);
   border: 1px solid #2a2218;
-  padding: 6px 12px;
+  padding: clamp(4px, 1.5vw, 6px) clamp(8px, 3vw, 12px);
   position: relative;
   overflow: hidden;
 }
@@ -442,7 +456,7 @@ body::before {
 }
 
 .time-prefix {
-  font-size: 9px;
+  font-size: clamp(7px, 2vw, 9px);
   letter-spacing: 0.2em;
   color: var(--amber);
   opacity: 0.6;
@@ -451,7 +465,7 @@ body::before {
 
 .time-value {
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: clamp(9px, 2.5vw, 11px);
   font-weight: 500;
   color: var(--amber2);
   letter-spacing: 0.06em;
@@ -459,6 +473,7 @@ body::before {
     0 0 8px var(--amber),
     0 0 20px rgba(200, 132, 26, 0.3);
   word-break: break-all;
+  min-width: 0;
 }
 
 /* ── SOCIAL ── */
@@ -470,12 +485,12 @@ body::before {
 .social-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
+  gap: clamp(5px, 2vw, 8px);
+  padding: clamp(5px, 1.5vw, 6px) clamp(8px, 3vw, 10px);
   border-bottom: 1px solid var(--cream3);
   text-decoration: none;
   font-family: "DM Mono", monospace;
-  font-size: 10px;
+  font-size: clamp(8.5px, 2.2vw, 10px);
   color: var(--ink);
   letter-spacing: 0.04em;
   transition:
@@ -501,16 +516,23 @@ body::before {
 
 .link-bullet {
   color: var(--amber);
-  font-size: 10px;
+  font-size: clamp(8px, 2.2vw, 10px);
   opacity: 0.7;
+  flex-shrink: 0;
 }
 .social-link:hover .link-bullet {
   opacity: 1;
 }
+
 .link-handle {
   margin-left: auto;
   color: var(--faded);
-  font-size: 10px;
+  font-size: clamp(8px, 2.2vw, 10px);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40%;
 }
 .social-link:hover .link-handle {
   color: var(--amber);
@@ -520,7 +542,7 @@ body::before {
 .lists-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
 }
 
 .profile-list {
@@ -529,14 +551,14 @@ body::before {
 
 .profile-list li {
   font-family: "DM Mono", monospace;
-  font-size: 9.5px;
+  font-size: clamp(8.5px, 2.2vw, 9.5px);
   color: var(--ink);
   letter-spacing: 0.03em;
-  padding: 3.5px 0;
+  padding: clamp(2.5px, 1vw, 3.5px) 0;
   border-bottom: 1px dashed var(--cream3);
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: clamp(4px, 1.5vw, 6px);
   line-height: 1.35;
   transition: padding-left 0.12s;
 }
@@ -544,10 +566,11 @@ body::before {
 .profile-list li:last-child {
   border-bottom: none;
 }
+
 .profile-list li span {
   color: var(--amber);
   flex-shrink: 0;
-  font-size: 11px;
+  font-size: clamp(9px, 2.5vw, 11px);
 }
 .profile-list.dislikes li span {
   color: var(--red-orange);
@@ -556,45 +579,114 @@ body::before {
   padding-left: 4px;
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .page-wrapper {
-    max-width: 100%;
+/* Compact phones */
+@media (max-width: 480px) {
+  :root {
+    --rail-w: clamp(18px, 4.5vw, 24px);
   }
+
+  .sprocket-strip {
+    padding: 4px 10px;
+    gap: 6px;
+  }
+
   .sprockets {
-    gap: 8px;
+    gap: 6px;
   }
+
   .sprocket-strip .sprocket {
-    width: 10px;
-    height: 8px;
+    width: 8px;
+    height: 6px;
   }
+
   .profile-info {
-    padding: 1.1rem 1rem;
-    gap: 1rem;
+    padding: 0.65rem 0.85rem;
+    gap: 0.5rem;
   }
+
   .user-name {
-    font-size: 28px;
+    font-size: clamp(20px, 5.5vw, 26px);
   }
-  .time-value {
-    font-size: 11px;
+
+  .lists-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
+
+  .film-counter.right {
+    display: none;
+  }
+
   .exposure-strip span:last-child {
     display: none;
   }
 }
 
-@media (max-width: 420px) {
+/* Small phones */
+@media (max-width: 380px) {
+  :root {
+    --rail-w: 18px;
+  }
+
+  .user-name {
+    font-size: 20px;
+  }
+
   .lists-row {
     grid-template-columns: 1fr;
   }
-  .user-name {
-    font-size: 24px;
-  }
-  .film-counter.right {
+
+  .sprocket-rail .sprocket {
     display: none;
   }
-  .sprocket-rail .sprocket {
-    width: 12px;
-    height: 9px;
+
+  .photo-print {
+    padding: 10px 10px 0;
+  }
+
+  .print-border {
+    border-width: 6px;
+  }
+
+  .profile-info {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .exposure-strip {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+}
+
+@media (hover: none) {
+  .social-link:hover {
+    background: transparent;
+    color: var(--ink);
+    padding-left: clamp(8px, 3vw, 10px);
+  }
+  .social-link:hover .link-bullet {
+    opacity: 0.7;
+  }
+  .social-link:hover .link-handle {
+    color: var(--faded);
+  }
+  .profile-list li:hover {
+    padding-left: 0;
+  }
+
+  .hint-text {
+    opacity: 0.7;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card {
+    transition: none;
+    animation: none;
+  }
+  .hint-text {
+    animation: none;
+    opacity: 0.7;
   }
 }
